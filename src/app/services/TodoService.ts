@@ -4,6 +4,7 @@ import { Todo } from '../model/Todo';
 
 @Injectable()
 export class TodoService {
+    todos: Array<Todo> = [];
 
     constructor (private todoApi: TodosApi) { }
 
@@ -12,18 +13,13 @@ export class TodoService {
         return this.todoApi.getTodos()
         .then(
             (apiTodos) => {
-                 return new Promise(
-                      (resolve, reject) => {
-                          setTimeout(
-                              () => {
+                this.todos = [...apiTodos];
 
-                                  resolve ( apiTodos );
-
-                                  reject ( 'SERVICE - Impossible to get !!' );
-                              },
-                              2000
-                          );
-                      }
+                return new Promise(
+                    (resolve, reject) => {
+                        resolve ( this.todos );
+                        reject ( 'SERVICE - Impossible to get !!' );
+                    }
                 );
             }
         )
@@ -37,16 +33,12 @@ export class TodoService {
         return this.todoApi.addToList(todo)
         .then(
             (apiTodos) => {
+                 this.todos = [...apiTodos];
+
                 return new Promise(
                     (resolve, reject) => {
-                        setTimeout(
-                            () => {
-                                resolve ( apiTodos );
-
-                                reject ( 'SERVICE - Impossible to add !!' );
-                            },
-                           2000
-                        );
+                        resolve ( this.todos );
+                        reject ( 'SERVICE - Impossible to add !!' );
                     }
                  );
             }
@@ -61,16 +53,12 @@ export class TodoService {
         return this.todoApi.reset()
         .then(
             (apiTodos) => {
+                this.todos = [...apiTodos];
+
                 return new Promise(
                     (resolve, reject) => {
-                        setTimeout(
-                            () => {
-                                resolve ( apiTodos );
-
-                                reject ( 'SERVICE - Impossible to reset !!' );
-                            },
-                            2000
-                        );
+                        resolve ( this.todos );
+                        reject ( 'SERVICE - Impossible to reset !!' );
                     }
                 );
             }

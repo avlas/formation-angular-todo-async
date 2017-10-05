@@ -9,17 +9,75 @@ export class TodoService {
 
   // ASYNCHRONE
     getTodos(): Promise <Array <Todo> >  {
-        return this.todoApi.getTodos();
+        return this.todoApi.getTodos()
+        .then(
+            (apiTodos) => {
+                 return new Promise(
+                      (resolve, reject) => {
+                          setTimeout(
+                              () => {
+
+                                  resolve ( apiTodos );
+
+                                  reject ( 'SERVICE - Impossible to get !!' );
+                              },
+                              2000
+                          );
+                      }
+                );
+            }
+        )
+        .catch(
+            (message) => { console.log(message); }
+        );
     }
 
     // ASYNCHRONE
     addToList(todo): Promise <any>  {
-        return this.todoApi.addToList(todo);
+        return this.todoApi.addToList(todo)
+        .then(
+            (apiTodos) => {
+                return new Promise(
+                    (resolve, reject) => {
+                        setTimeout(
+                            () => {
+                                resolve ( apiTodos );
+
+                                reject ( 'SERVICE - Impossible to add !!' );
+                            },
+                           2000
+                        );
+                    }
+                 );
+            }
+        )
+        .catch(
+            (message) => { console.log(message); }
+        );
     }
 
     // ASYNCHRONE
     resetList(): Promise <any>  {
-        return this.todoApi.reset();
+        return this.todoApi.reset()
+        .then(
+            (apiTodos) => {
+                return new Promise(
+                    (resolve, reject) => {
+                        setTimeout(
+                            () => {
+                                resolve ( apiTodos );
+
+                                reject ( 'SERVICE - Impossible to reset !!' );
+                            },
+                            2000
+                        );
+                    }
+                );
+            }
+        )
+        .catch(
+            (message) => { console.log(message); }
+        );
     }
 
     // SYNCHRONE

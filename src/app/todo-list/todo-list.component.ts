@@ -17,7 +17,7 @@ export class TodoListComponent implements OnInit {
     onAdd(todo): void {
         this.todoService.addToList(todo)
         .then(
-            (apiTodos) => { this.todos = apiTodos; }
+            (serviceTodos) => { this.todos = serviceTodos; }
         )
         .catch(
             (message) => { console.log(message); }
@@ -27,7 +27,7 @@ export class TodoListComponent implements OnInit {
     onReset(): void {
         this.todoService.resetList()
         .then(
-            (apiTodos) => {this.todos = apiTodos; }
+            (serviceTodos) => {this.todos = serviceTodos; }
         )
         .catch(
             (message) => { console.log(message); }
@@ -41,7 +41,7 @@ export class TodoListComponent implements OnInit {
     ngOnInit() {
          this.todoService.getTodos()
          .then(
-              (apiTodos) => { this.todos = apiTodos; }
+              (serviceTodos) => { this.todos = serviceTodos; }
          );
 
         // this.todos = [

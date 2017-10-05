@@ -6,10 +6,13 @@ export class TodosApi {
 
   getTodos(): Promise <Array <Todo> > {
       return new Promise(
-          (resolve) => {
+          (resolve, reject) => {
               setTimeout(
                   () => {
+                      // [...this.todos] => en ES6, [] copy le tableau "todos" dans un nouveau tableau
                       resolve ( [...this.todos] );
+
+                      reject ( 'API - Impossible to get !!' );
                   },
                   2000
               );
@@ -22,9 +25,12 @@ export class TodosApi {
           (resolve, reject) => {
               setTimeout(
                   () => {
+
                       this.todos = [todo, ...this.todos];
+
                       resolve ( this.todos );
-                      // reject ('Impossible to add !!');
+
+                      reject ('API - Impossible to add !!');
                   },
                 1000
               );
@@ -37,9 +43,12 @@ export class TodosApi {
           (resolve, reject) => {
               setTimeout(
                   () => {
+
                       this.todos = [];
+
                       resolve ( this.todos );
-                      // reject ('Impossible to reset !!');
+
+                      reject ('API - Impossible to reset !!');
                   },
                   2000
               );

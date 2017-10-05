@@ -1,0 +1,8 @@
+
+<div>
+
+    <span [ngClass]="{'done': todo.isDone, 'red': !todo.isDone }"> {{todo?.title | uppercase }} </span>
+
+    <input type="checkbox" (change)="onChange()" [(ngModel)]="todo.isDone">
+
+</div>

@@ -1,0 +1,16 @@
+
+<app-todo-form (add)="onAdd($event)" (reset)="onReset()"></app-todo-form>
+
+<div *ngIf="todos.length > 0; else noTodo">
+    <p> Number of Todos : {{todos.length}}</p>
+
+    <ul>
+        <li *ngFor="let todo of todos">
+            <app-todo-item [todo]="todo" (modifiedTodo)="onModifToto($event)"></app-todo-item>
+        </li>
+    </ul>
+</div>
+
+<ng-template #noTodo>
+     <p> Vous n’avez aucun todo !! </p>
+</ng-template>

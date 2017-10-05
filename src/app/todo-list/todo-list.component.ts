@@ -12,13 +12,14 @@ export class TodoListComponent implements OnInit {
 
     todos: Array <Todo> = [];
 
-    constructor( private todoService: TodoService ) {
-    }
+    constructor( private todoService: TodoService ) {}
 
     onAdd(todo): void {
         this.todoService.addToList(todo)
         .then(
-            (todosApi) => { this.todos = todosApi; },
+            (apiTodos) => { this.todos = apiTodos; }
+        )
+        .catch(
             (message) => { console.log(message); }
         );
     }
@@ -26,7 +27,9 @@ export class TodoListComponent implements OnInit {
     onReset(): void {
         this.todoService.resetList()
         .then(
-            (todosApi) => { this.todos = todosApi; },
+            (apiTodos) => {this.todos = apiTodos; }
+        )
+        .catch(
             (message) => { console.log(message); }
         );
     }
@@ -38,7 +41,7 @@ export class TodoListComponent implements OnInit {
     ngOnInit() {
          this.todoService.getTodos()
          .then(
-              (todosApi) => { this.todos = todosApi; }
+              (apiTodos) => { this.todos = apiTodos; }
          );
 
         // this.todos = [

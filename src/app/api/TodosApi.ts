@@ -2,20 +2,14 @@ import { Todo } from '../model/Todo';
 
 export class TodosApi {
 
+  todos: Array<Todo> = [];
+
   getTodos(): Promise <Array <Todo> > {
       return new Promise(
           (resolve) => {
               setTimeout(
                   () => {
-                      resolve(
-                      [
-                          new Todo('Send a mail', false),
-                          new Todo('Call mom', true),
-                          new Todo('Go to gym', false),
-                          new Todo('Clean the chicken', true),
-                          new Todo('Buy a car', false)
-                      ]
-                    );
+                      resolve ( [...this.todos] );
                   },
                   2000
               );
@@ -24,29 +18,15 @@ export class TodosApi {
   }
 
   addToList(todo): Promise <any> {
-      // this.getTodos().then(
-      //   (apiTodos) => { this.serviceTodos = apiTodos; }
-      // );
-      //
-      // this.serviceTodos.unshift(todo);
-
       return new Promise(
           (resolve, reject) => {
               setTimeout(
                   () => {
-                      resolve(
-                          [
-                              new Todo('Send a mail', false),
-                              new Todo('Call mom', true),
-                              new Todo('Go to gym', false),
-                              new Todo('Clean the chicken', true),
-                              new Todo('Buy a car', false),
-                              new Todo(todo.title, todo.isDone)
-                          ]
-                      );
-                      reject( 'Impossible to add !!');
+                      this.todos = [todo, ...this.todos];
+                      resolve ( this.todos );
+                      // reject ('Impossible to add !!');
                   },
-                2000
+                1000
               );
           }
       );
@@ -57,8 +37,9 @@ export class TodosApi {
           (resolve, reject) => {
               setTimeout(
                   () => {
-                      resolve( [] );
-                      reject('Impossible to reset !!');
+                      this.todos = [];
+                      resolve ( this.todos );
+                      // reject ('Impossible to reset !!');
                   },
                   2000
               );
